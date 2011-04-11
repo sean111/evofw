@@ -16,7 +16,9 @@ class System {
     public function __construct($name='default') {
         $config=Config::init(confFile);
         $this->path=$config->get('path');
-        Database::Init();        
+        if($config->get('autoLoadDB')) {
+            Database::Init();        
+        }
         unset($_SESSION['globals']);
     }
     public static function getValue($name, $isInt=false) {

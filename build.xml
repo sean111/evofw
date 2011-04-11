@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="evofw" default="dist">
+    <target name="tests">
+        <echo msg="Running tests..." />
+        <phpunit>
+            <formatter outfile="results.xml" type="xml" usefile="true" />
+            <batchtest>
+                <fileset dir="tests">
+                    <include name="**/*test.php" />
+                    <exclude name="**/*.inc.php" />
+                </fileset>
+            </batchtest>
+        </phpunit>            
+    </target>
+</project>
