@@ -91,9 +91,11 @@ class Database
         $keys=implode(',', $keys);
         $vals=implode(',', $vals);
         $sql="INSERT INTO $table ($keys) VALUES ($vals)";
+        $osql=$sql;
         self::$db->query($sql);
         self::$results=array();
         self::$results[]=$sql;
+        self::$results['sql']=$osql;
         if (self::$db->error) {
             self::$results[]=self::$db->error;            
             return false;
@@ -137,7 +139,12 @@ class Database
     }
     public static function select($table, $fieldArray, $whereArray=null) {
         $where=array();
-        $fields=implode(', ', $fieldArray);
+        if(is_array($fieldArray)) {
+            $fields=implode(', ', $fieldArray);
+        }
+        else {
+            $fields=$fieldArray;
+        }
         foreach($whereArray as $key=>$val) {
             $where[]="$key='$val'";
         }
@@ -167,6 +174,24 @@ class Database
                 return true;
             }
         }
+    }
+    public static function delete($table, $whereArray=null) {
+        $sql="DELETE FROM $table";
+        foreach($whereArray as $key=>$val) {
+            $where[]="$key='$val'";
+        }
+        $where=implode(" AND ", $where);
+        if($where) {
+            $sql.=" WHERE $where";
+        }    
+        self::$db->query($sql);
+        self::$results=array();
+        self::$results['sql']=$sql;
+        if (self::$db->error) {
+            self::$results['error']=self::$db->error;
+            return false;
+        }
+        return true;
     }
     public static function results() 
     {
