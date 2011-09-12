@@ -1,5 +1,5 @@
 <?php
-require_once 'system.php';
+require_once 'src/system.php';
 
 define('confFile','tests/config.inc.php');
 

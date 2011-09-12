@@ -102,7 +102,7 @@ class Database
             return true;
         }
     }
-    public static function update($table, $valueArray,$whereArray) 
+    public static function update($table, $valueArray,$whereArray=null) 
     {
         $vals=array();
         foreach ($valueArray as $key=>$val) {
@@ -134,6 +134,39 @@ class Database
             return false;
         }
         return true;
+    }
+    public static function select($table, $fieldArray, $whereArray=null) {
+        $where=array();
+        $fields=implode(', ', $fieldArray);
+        foreach($whereArray as $key=>$val) {
+            $where[]="$key='$val'";
+        }
+        $where=implode(" AND ", $where);
+        $sql="SELECT $fields FROM $table";
+        if($where) {
+            $sql.=" WHERE $where";
+        }
+        
+        self::$results=array();
+        self::$results['sql']=$sql;
+        $sql=self::$db->query($sql);
+        if (self::$db->error) {
+            self::$results['error']=self::$db->error;            
+            return false;
+        } else {
+            if ($sql->num_rows > 0) {
+                $cnt=0;
+                while ($tmp=$sql->fetch_assoc()) {
+                    self::$results[]=$tmp;
+                    $cnt++;
+                }
+                self::$results['rows']=$cnt;
+                return true;
+            } else {
+                self::$results['rows']=0;
+                return true;
+            }
+        }
     }
     public static function results() 
     {
