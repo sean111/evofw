@@ -1,9 +1,9 @@
 <?php
 session_start();
-include('config.php');
-include('database.php');
-include('view.php');
-include('morph.php');
+require_once 'config.php';
+require_once 'database.php';
+require_once 'view.php';
+require_once 'morph.php';
 
 /**
 * This system is loosely inspired by Kohana. Their framework as too bulky for a game despite being a great system
@@ -106,6 +106,14 @@ class System {
 
         // we are done...
         return $data;
+    }
+    public function loadModule($name) {
+        if(is_file($name)) {
+            require_once $name;
+        }
+        else {
+            throw new Exception("Couldn't find the module");
+        }
     }
 }
 ?>
