@@ -1,5 +1,5 @@
 <?php
-require_once 'twig/Twig.php';
+require_once 'Twig/Autoloader.php';
 class Twig {
     private $_data=array();
     private $_file;
