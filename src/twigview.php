@@ -1,6 +1,6 @@
 <?php
 require_once 'Twig/Autoloader.php';
-class Twig {
+class TwigView {
     private $_data=array();
     private $_file;
     private $twig;
