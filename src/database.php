@@ -84,6 +84,7 @@ class Database
             $keys[]=$key;
             $tmp=self::$db->real_escape_string($val);
             if (gettype($val)!='integer') {
+                $tmp=self::escapeString($tmp);
                 $tmp="'".$tmp."'";
             }
             $vals[]=$tmp;
@@ -110,6 +111,7 @@ class Database
         foreach ($valueArray as $key=>$val) {
             $tmp=$val;
             if (gettype($val)!='integer') {
+                $tmp=self::escapeString($tmp);
                 $tmp="'".$tmp."'";
             }
             $vals[]="`$key`=$tmp";
@@ -118,6 +120,7 @@ class Database
         foreach ($whereArray as $key=>$val) {
             $tmp=$val;
             if (gettype($val)!='integer') {
+                $tmp=self::escapeString($tmp);
                 $tmp="'".$tmp."'";
             }
             $where[]="`$key`=$tmp";
