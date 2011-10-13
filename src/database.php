@@ -83,7 +83,7 @@ class Database
         foreach ($valueArray as $key=>$val) {
             $keys[]=$key;
             if (gettype($val)!='integer') {
-                $tmp=self::escapeString($tmp);
+                $tmp=self::escapeString($val);
                 $tmp="'".$tmp."'";
             }
             $vals[]=$tmp;
