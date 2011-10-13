@@ -82,7 +82,6 @@ class Database
         $keys=array();
         foreach ($valueArray as $key=>$val) {
             $keys[]=$key;
-            $tmp=self::$db->real_escape_string($val);
             if (gettype($val)!='integer') {
                 $tmp=self::escapeString($tmp);
                 $tmp="'".$tmp."'";
