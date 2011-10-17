@@ -86,11 +86,14 @@ class Database
                 $tmp=self::escapeString($val);
                 $tmp="'".$tmp."'";
             }
+            else {
+                $tmp=$val;
+            }
             $vals[]=$tmp;
         }
-        $keys=implode(',', $keys);
+        $keys=implode('`,`', $keys);
         $vals=implode(',', $vals);
-        $sql="INSERT INTO $table ($keys) VALUES ($vals)";
+        $sql="INSERT INTO $table (`$keys`) VALUES ($vals)";
         $osql=$sql;
         self::$db->query($sql);
         self::$results=array();
@@ -121,7 +124,7 @@ class Database
             if (gettype($val)!='integer') {
                 $tmp=self::escapeString($tmp);
                 $tmp="'".$tmp."'";
-            }
+            }            
             $where[]="`$key`=$tmp";
         }
         $vals=implode(",", $vals);
