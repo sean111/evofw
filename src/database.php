@@ -1,9 +1,8 @@
 <?php
 /**
 * This file contains the Database class to use when connection and querying to the database
-* @author  Sean Burke <seanb@eshark.net>
+* @package evofw
 * @version 1.0
-* @package Goumada
 */
 
 /**
@@ -111,7 +110,7 @@ class Database
     * Function to update data in a table
     * @param string $table The dable to update
     * @param array $valueArray Array of value to update
-    * @param array $whereArray Array to use for the where clause
+    * @param array $whereArray Array to use for the where clause using key=>val
     */
     public static function update($table, $valueArray,$whereArray=null) 
     {
@@ -148,6 +147,11 @@ class Database
         }
         return true;
     }
+    /**
+    * Select values from a database table
+    * @param string $table The table to select from 
+    * @param array $fieldArray Array containing fields to select
+    */
     public static function select($table, $fieldArray, $whereArray=null) {
         $where=array();
         if(is_array($fieldArray)) {
@@ -186,6 +190,11 @@ class Database
             }
         }
     }
+    /**
+    * Function to delete records from the database
+    * @param string $table The table to delete from
+    * @param array $whereArray Array of values for the where vlause using key=>val
+    */
     public static function delete($table, $whereArray=null) {
         $sql="DELETE FROM $table";
         foreach($whereArray as $key=>$val) {
@@ -204,10 +213,18 @@ class Database
         }
         return true;
     }
+    /**
+    * Function to return the results of the previous operation
+    * @return array Results array
+    */
     public static function results() 
     {
         return self::$results;
     }
+    /**
+    * Function to clean out details from the results array
+    * @return array Array with details filtered out
+    */
     public static function toArray() {
         $res=self::$results;
         if(empty($res) || $res['rows']==0) {
@@ -219,6 +236,11 @@ class Database
         }
         return $results;
     }
+    /**
+    * Function to escape a string
+    * @param string The string to clean
+    * @return string The cleaned string
+    */
     public static function escapeString($string) {
         return self::$db->real_escape_string($string);
     }

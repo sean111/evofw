@@ -7,9 +7,8 @@ require_once 'morph.php';
 
 /**
 * This system is loosely inspired by Kohana. Their framework as too bulky for a game despite being a great system
-* @package Goumada
-* @author Sean Burke
-* @copyright (c)2010-2011 eShark Network LLC
+* @package evofw
+* @version 1.0
 */
 class System {    
     const VERSION='0.0.2';    
