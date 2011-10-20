@@ -107,6 +107,12 @@ class Database
             return true;
         }
     }
+    /**
+    * Function to update data in a table
+    * @param string $table The dable to update
+    * @param array $valueArray Array of value to update
+    * @param array $whereArray Array to use for the where clause
+    */
     public static function update($table, $valueArray,$whereArray=null) 
     {
         $vals=array();
