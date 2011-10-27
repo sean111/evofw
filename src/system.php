@@ -1,9 +1,10 @@
 <?php
 session_start();
-require_once 'config.php';
-require_once 'database.php';
-require_once 'view.php';
-require_once 'morph.php';
+$myDir=dirname(__FILE__);
+require_once $myDir.'/config.php';
+require_once $myDir.'/database.php';
+require_once $myDir.'/view.php';
+require_once $myDir.'/morph.php';
 
 /**
 * This system is loosely inspired by Kohana. Their framework as too bulky for a game despite being a great system
