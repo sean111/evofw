@@ -38,6 +38,9 @@ class System {
         }
         return $val;
     }
+    public static function clearValue($name) {
+        unset($_SESSION['globals'][$name]);
+    }
     public function load($system=null, $action=null)  {
          if(!$system) {
                 $system=Config::get('default_system');
