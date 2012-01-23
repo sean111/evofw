@@ -160,8 +160,10 @@ class Database
         else {
             $fields=$fieldArray;
         }
-        foreach($whereArray as $key=>$val) {
-            $where[]="$key='$val'";
+        if(is_array($whereArray)) { 
+            foreach($whereArray as $key=>$val) {
+                $where[]="$key='$val'";
+            }
         }
         $where=implode(" AND ", $where);
         $sql="SELECT $fields FROM $table";
