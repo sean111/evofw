@@ -6,8 +6,8 @@ $config=array(
         'database'=>array(
             'default'=>array(
                 'host'=>'localhost',
-                'user'=>'seanb',
-                'pass'=>'w00tw00t',
+                'user'=>'test',
+                'pass'=>'test1234',
                 'name'=>'lcnl', 
             ),
         ),
