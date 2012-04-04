@@ -1,10 +1,11 @@
 <?php
 session_start();
-$myDir=dirname(__FILE__);
-require_once $myDir.'/config.php';
-require_once $myDir.'/database.php';
-require_once $myDir.'/view.php';
-require_once $myDir.'/morph.php';
+//$myDir=dirname(__FILE__);
+define('MY_DIR', dirname(__FILE__));
+require_once MY_DIR.'/config.php';
+//require_once $myDir.'/database.php';
+require_once MY_DIR.'/view.php';
+require_once MY_DIR.'/morph.php';
 
 /**
 * This system is loosely inspired by Kohana. Their framework as too bulky for a game despite being a great system
@@ -16,8 +17,11 @@ class System {
     public function __construct($name='default') {
         $config=Config::init(confFile);
         $this->path=$config->get('path');
-        if($config->get('autoLoadDB')) {
-            Database::Init();        
+        if($db=$config->get('database')) {
+            require_once MY_DIR.'/database.'.$db['driver'].'.php';
+            if($config->get('autoLoadDB')) {            
+                Database::Init();        
+            }
         }
         unset($_SESSION['globals']);
     }

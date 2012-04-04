@@ -1,6 +1,6 @@
 <?php
 /**
-* This file contains the Database class to use when connection and querying to the database
+* This file contains the MySqli Database class to use when connection and querying to the database
 * @package evofw
 * @version 1.0
 */
