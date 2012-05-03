@@ -46,7 +46,7 @@ class System {
         unset($_SESSION['globals'][$name]);
     }
     public function load($system=null, $action=null)  {
-         if(!$system) {
+            if(!$system) {
                 $system=Config::get('default_system');
             }
             $file=Config::get('path').'/'.$system.'.php';
