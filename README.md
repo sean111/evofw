@@ -9,6 +9,7 @@ Create a new config file
 
     <?php
     $config=array(
+        'driver'=>'dbdriver', //odbc or mysqli
         'default' => array(
             'path'=>'inc/site/',
             'database'=>array(
