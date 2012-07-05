@@ -42,6 +42,9 @@ class System {
         }
         return $val;
     }
+    public static function setValue($name, $value) {
+        $_SESSION['globals'][$name]=$value;
+    }
     public static function clearValue($name) {
         unset($_SESSION['globals'][$name]);
     }
