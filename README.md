@@ -40,6 +40,7 @@ Create your default page
 
 #Examples
 * [LoLStats](https://bitbucket.org/sean111/lolstats) - A site I built to display LoL data that I collect from LoLKing
+* [LolStats2](https://bitbucket.org/sean111/lolstats2) - Upgraded version of LoLStats made to work with the new LoLKing layout
 
 # License
 I am currently looking into which OS license I should put this under. Currently it's free to use as long as you don't sell the code.
