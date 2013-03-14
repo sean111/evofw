@@ -32,7 +32,13 @@ class Database
         }
         $dbc=Config::get('database');
         $dbc=$dbc[$name];
-        self::$db=new mysqli($dbc['host'], $dbc['user'], $dbc['pass'], $dbc['name']);
+        if(empty($dbc['port'])) {
+            self::$db=new mysqli($dbc['host'], $dbc['user'], $dbc['pass'], $dbc['name']);    
+        }
+        else {
+            self::$db=new mysqli($dbc['host'], $dbc['user'], $dbc['pass'], $dbc['name'], $dbc['port']);
+        }
+        
         self::$name=$name;
         return self::$instance[$name];
     }
