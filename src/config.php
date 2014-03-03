@@ -11,7 +11,7 @@ class Config
     private static $name = null;
     /**
     * @param string $file Config file to parse
-    * @param string $game Game setting in the config file
+    * @param string $name Game setting in the config file
     * @return object Instance of the config class
     */
     public static function init($file, $name='default') {
