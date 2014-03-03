@@ -32,7 +32,7 @@ class TwigView {
     */
     public function load($name) {
         $path=Config::get('path');
-        $view=$path.'/views/'.$name;        
+        $view=$path.'/views/'.$name;
         if(!$name || !is_file($view)) {
             throw new Exception("No valid template supplied");
         }

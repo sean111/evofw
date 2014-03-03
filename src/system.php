@@ -14,12 +14,12 @@ require_once MY_DIR.'/morph.php';
 */
 class System {    
     const VERSION='0.0.2';    
-    public function __construct($name='default') {
-        $config=Config::init(confFile);
+    public function __construct($configFile, $name='default') {
+        $config=Config::init($configFile);
         $this->path=$config->get('path');
         if($db=$config->get('database')) {
-            require_once MY_DIR.'/database.'.$db['driver'].'.php';
-            if($config->get('autoLoadDB')) {            
+            require_once MY_DIR.'/database.php';
+            if($config->get('autoLoadDB')) {
                 Database::Init();        
             }
         }
@@ -126,4 +126,3 @@ class System {
         }
     }
 }
-?>
