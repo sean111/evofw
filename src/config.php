@@ -4,25 +4,26 @@
 * @package evofw
 * @version 1.0
 */
-class Config {
-	private static $confArray=array();
-	private static $instance=null;
-	private static $game=null;
+class Config
+{
+	private static $confArray = array();
+	private static $instance = null;
+	private static $name = null;
 	/**
 	* @param string $file Config file to parse
 	* @param string $game Game setting in the config file
 	* @return object Instance of the config class
 	*/
-	public static function init($file, $game='default') {
+	public static function init($file, $name='default') {
 		if(!$file) {
 			throw new Exception("No valid config file supplied");
 		}
-		if(self::$instance==null) {
-			self::$instance=new self;
+		if (self::$instance == null) {
+			self::$instance = new self;
 		}
 		include($file);
-		self::$confArray=$config;
-		self::$game=$game;
+		self::$confArray = $config;
+		self::$name = $name;
 		return self::$instance;
 	}
 	/**
@@ -31,12 +32,11 @@ class Config {
 	* @return mixed Value for the provided key or all values if the key is null
 	*/
 	public static function get($key=null) {
-		if(!$key) {
-			return self::$confArray[self::$game];
+		if (!$key) {
+			return self::$confArray[self::$name];
 		}
 		else {
-			return self::$confArray[self::$game][$key];
+			return self::$confArray[self::$name][$key];
 		}
 	}
 }
-?>
