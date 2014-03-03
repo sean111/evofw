@@ -9,11 +9,11 @@ Create a new config file
 
     <?php
     $config=array(
-        'driver'=>'dbdriver', //odbc or mysqli
         'default' => array(
             'path'=>'inc/site/',
             'database'=>array(
                 'default'=>array(
+                    'driver' => 'PDO Driver'
                     'host'=>'localhost',
                     'user'=>'username',
                     'pass'=>'password',
@@ -29,9 +29,8 @@ Create a new config file
 Create your default page
 
     <?php
-    define('confFile', 'location_of_config_file');
     include('path_to_evofw/src/system.php');
-    $site=new System;
+    $site=new System('Path to config file');
     //The following in how I personally load pages. Will take index.php?page=site&action=test and load the action_test() in site.php
     $page=$site->getVaule('page');
     $action=$site->getValue('action');
@@ -46,4 +45,4 @@ Create your default page
 I am currently looking into which OS license I should put this under. Currently it's free to use as long as you don't sell the code.
 
 # Helping
-No one is perfect and I am definitally far from it. If you see something you would like to fix please fork the code and send me a pull request. 
+No one is perfect and I am definitely far from it. If you see something you would like to fix please fork the code and send me a pull request.
