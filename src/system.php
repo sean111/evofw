@@ -16,11 +16,11 @@ class System
 {
     const VERSION = '0.0.2';
     public function __construct($configFile, $name='default') {
-        $config=Config::init($configFile);
-        $this->path=$config->get('path');
+        $config = Config::init($configFile);
+        $this->path = $config->get('path');
         if ($db=$config->get('database')) {
             require_once MY_DIR.'/database.php';
-            if($config->get('autoLoadDB')) {
+            if ($config->get('autoLoadDB')) {
                 Database::Init();        
             }
         }
@@ -28,11 +28,11 @@ class System
     }
     public static function getValue($name, $isInt=false) {
         if ($_SESSION['globals']) {
-            $val=$_SESSION['globals'][$name];
+            $val = $_SESSION['globals'][$name];
         }	
         else {
-            $tmp=array_merge($_POST,$_REQUEST);
-            $val=$tmp[$name];
+            $tmp = array_merge($_POST,$_REQUEST);
+            $val = $tmp[$name];
             $_SESSION['globals']=$tmp;
         }
         if($isInt) {
@@ -54,15 +54,15 @@ class System
             $system=Config::get('default_system');
         }
         $file=Config::get('path').'/'.$system.'.php';
-        $system{0}=strtoupper($system{0});
+        $system{0} = strtoupper($system{0});
         if (!is_file($file)) {
             throw new Exception("No class {$system} found");
         }
         include_once $file;
-        $class=new $system();
-        if($action) {
-            $action="action_".$action;
-            if(method_exists($class,$action)) {
+        $class = new $system();
+        if ($action) {
+            $action = "action_".$action;
+            if (method_exists($class,$action)) {
                 $class->$action();
             }
             else {
@@ -75,8 +75,8 @@ class System
         return true;
     }
     public static function send_email($email,$subject,$message) {
-        $header="From: system@lcnlegacy.com\nMIME-Version: 1.0\nContent-type: text/html charset=iso-8859-1\n";
-        if(mail($email,$subject,$message,$header)) {
+        $header = "From: system@lcnlegacy.com\nMIME-Version: 1.0\nContent-type: text/html charset=iso-8859-1\n";
+        if (mail($email,$subject,$message,$header)) {
             return true;
         }
         else {
@@ -109,9 +109,9 @@ class System
 
         do
         {
-                // Remove really unwanted tags
-                $old_data = $data;
-                $data = preg_replace('#</*(?:applet|b(?:ase|gsound|link)|embed|frame(?:set)?|i(?:frame|layer)|l(?:ayer|ink)|meta|object|s(?:cript|tyle)|title|xml)[^>]*+>#i', '', $data);
+            // Remove really unwanted tags
+            $old_data = $data;
+            $data = preg_replace('#</*(?:applet|b(?:ase|gsound|link)|embed|frame(?:set)?|i(?:frame|layer)|l(?:ayer|ink)|meta|object|s(?:cript|tyle)|title|xml)[^>]*+>#i', '', $data);
         }
         while ($old_data !== $data);
 

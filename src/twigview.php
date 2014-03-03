@@ -6,7 +6,7 @@
 */
 require_once 'Twig/Autoloader.php';
 class TwigView {
-    private $_data=array();
+    private $_data = array();
     private $_file;
     private $twig;
     /**
@@ -22,7 +22,7 @@ class TwigView {
     * @param string $name Name of the instance
     */
     public function __construct($name=null) {        
-        if($name) {            
+        if ($name) {
             $this->load($name);
         }                        
     }
@@ -37,8 +37,8 @@ class TwigView {
             throw new Exception("No valid template supplied");
         }
         $loader=new Twig_Loader_Filesystem($path.'/views/');
-        $this->twig=new Twig_Environment($loader);
-        $this->_file=$name;
+        $this->twig = new Twig_Environment($loader);
+        $this->_file = $name;
     }
     /**
     * Bind the supplied key and value to the template
