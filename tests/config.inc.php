@@ -1,17 +1,16 @@
 <?php
-$config=array(
+$config = array(
     'default' => array(
-        'testvar'=>42,
-        'path'=>'tests/',
+        'testvar' => 42,
+        'path' => "../tests/",
         'database'=>array(
             'default'=>array(
                 'host'=>'localhost',
                 'user'=>'test',
                 'pass'=>'test1234',
-                'name'=>'lcnl', 
+                'name'=>'test',
             ),
         ),
         'autoLoadDB'=>true,
     )
 );
-?>

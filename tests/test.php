@@ -7,4 +7,3 @@ class Test {
         print "I exist";
     }
 }
-?>
