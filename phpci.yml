@@ -15,4 +15,4 @@ test:
   php_cpd:
     allow_failuers: true
   php_loc:
-    directory: "src"
+    directory: "src/"

@@ -1,11 +1,7 @@
 <?php
 session_start();
-//$myDir=dirname(__FILE__);
 define('MY_DIR', dirname(__FILE__));
-require_once MY_DIR.'/config.php';
-//require_once $myDir.'/database.php';
-require_once MY_DIR.'/view.php';
-require_once MY_DIR.'/morph.php';
+
 
 /**
 * This system is loosely inspired by Kohana. Their framework as too bulky for a game despite being a great system
@@ -15,7 +11,11 @@ require_once MY_DIR.'/morph.php';
 class System
 {
     const VERSION = '0.0.2';
-    public function __construct($configFile, $name = 'default') {
+    public function __construct($configFile, $name = 'default')
+    {
+        require_once MY_DIR.'/config.php';
+        require_once MY_DIR.'/view.php';
+        require_once MY_DIR.'/morph.php';
         $config = Config::init($configFile, $name);
         $this->path = $config->get('path');
         if ($config->get('database')) {
@@ -26,7 +26,8 @@ class System
         }
         unset($_SESSION['globals']);
     }
-    public static function getValue($name, $isInt = false) {
+    public static function getValue($name, $isInt = false)
+    {
         if ($_SESSION['globals']) {
             $val = $_SESSION['globals'][$name];
         }
@@ -49,11 +50,12 @@ class System
     public static function clearValue($name) {
         unset($_SESSION['globals'][$name]);
     }
-    public function load($system=null, $action=null)  {
+    public function load($system = null, $action = null)
+    {
         if (!$system) {
-            $system=Config::get('default_system');
+            $system = Config::get('default_system');
         }
-        $file=Config::get('path').'/'.$system.'.php';
+        $file = Config::get('path').'/'.$system.'.php';
         $system{0} = strtoupper($system{0});
         if (!is_file($file)) {
             throw new Exception("No class {$system} found");
@@ -74,7 +76,8 @@ class System
         }
         return true;
     }
-    public static function send_email($from, $email, $subject, $message) {
+    public static function send_email($from, $email, $subject, $message)
+    {
         $header = "From: $from\nMIME-Version: 1.0\nContent-type: text/html charset=iso-8859-1\n";
         if (mail($email, $subject, $message, $header)) {
             return true;
@@ -83,7 +86,8 @@ class System
             return false;
         }
     }
-    public static function clean($data) {
+    public static function clean($data)
+    {
         // Fix &entity\n;
         $data = str_replace(array('&amp;','&lt;','&gt;'), array('&amp;amp;','&amp;lt;','&amp;gt;'), $data);
         $data = preg_replace('/(&#*\w+)[\x00-\x20]+;/u', '$1;', $data);
@@ -117,7 +121,8 @@ class System
         // we are done...
         return $data;
     }
-    public function loadModule($name) {
+    public function loadModule($name)
+    {
         if (is_file($name)) {
             require_once $name;
         }

@@ -31,7 +31,7 @@ class Config
     * @param string $key Key to get the value for
     * @return mixed Value for the provided key or all values if the key is null
     */
-    public static function get($key =   null)
+    public static function get($key = null)
     {
         if (!$key) {
             return self::$confArray[self::$name];

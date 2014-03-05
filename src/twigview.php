@@ -37,7 +37,7 @@ class TwigView
     {
         $path = Config::get('path');
         $view = $path.'/views/'.$name;
-        if(!$name || !is_file($view)) {
+        if (!$name || !is_file($view)) {
             throw new Exception("No valid template supplied");
         }
         $loader=new Twig_Loader_Filesystem($path.'/views/');
@@ -63,4 +63,3 @@ class TwigView
         print $this->twig->render($this->_file, $this->_data);
     }
 }
-?>

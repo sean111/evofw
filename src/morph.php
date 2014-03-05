@@ -9,10 +9,10 @@ class Morph
     /**
     * @param array $array Values to place into the class using key=>val
     */
-    public function  __construct($array = null)
+    public function __construct($array = null)
     {
         if ($array) {
-            foreach($array as $key => $val) {
+            foreach ($array as $key => $val) {
                 $this->{$key} = $val;
             }
         }
@@ -53,7 +53,7 @@ class Morph
     * Unset a variable
     * @param string $name Name of the variable to unset
     */
-    public function  __unset($name)
+    public function __unset($name)
     {
         unset($this->{$name});
     }
