@@ -14,8 +14,8 @@ class Config
     * @param string $name Game setting in the config file
     * @return object Instance of the config class
     */
-    public static function init($file, $name='default') {
-        if(!$file) {
+    public static function init($file, $name = 'default') {
+        if (!$file) {
             throw new Exception("No valid config file supplied");
         }
         if (self::$instance == null) {
@@ -31,7 +31,7 @@ class Config
     * @param string $key Key to get the value for
     * @return mixed Value for the provided key or all values if the key is null
     */
-    public static function get($key=null) {
+    public static function get($key =   null) {
         if (!$key) {
             return self::$confArray[self::$name];
         }

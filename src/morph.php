@@ -4,12 +4,13 @@
 * @package evofw
 * @version 1.0
 */
-Class Morph {
+class Morph
+{
     /**
     * @param array $array Values to place into the class using key=>val
     */
-    public function  __construct($array=null) {
-        if($array) {
+    public function  __construct($array = null) {
+        if ($array) {
             foreach($array as $key=>$val) {
                 $this->{$key}=$val;
             }
@@ -29,7 +30,7 @@ Class Morph {
     * @return mixed Value for the variable name passed
     */
     public function __get($name) {
-        if(isset($this->{$name})) {
+        if (isset($this->{$name})) {
             return $this->{$name};
         }
         else {

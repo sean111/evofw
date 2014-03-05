@@ -15,25 +15,25 @@ require_once MY_DIR.'/morph.php';
 class System
 {
     const VERSION = '0.0.2';
-    public function __construct($configFile, $name='default') {
+    public function __construct($configFile, $name = 'default') {
         $config = Config::init($configFile);
         $this->path = $config->get('path');
         if ($db=$config->get('database')) {
             require_once MY_DIR.'/database.php';
             if ($config->get('autoLoadDB')) {
-                Database::Init();        
+                Database::Init();
             }
         }
         unset($_SESSION['globals']);
     }
-    public static function getValue($name, $isInt=false) {
+    public static function getValue($name, $isInt = false) {
         if ($_SESSION['globals']) {
             $val = $_SESSION['globals'][$name];
-        }	
+        }
         else {
             $tmp = array_merge($_POST,$_REQUEST);
             $val = $tmp[$name];
-            $_SESSION['globals']=$tmp;
+            $_SESSION['globals'] = $tmp;
         }
         if($isInt) {
             settype($val,'int');
@@ -44,7 +44,7 @@ class System
         return $val;
     }
     public static function setValue($name, $value) {
-        $_SESSION['globals'][$name]=$value;
+        $_SESSION['globals'][$name] = $value;
     }
     public static function clearValue($name) {
         unset($_SESSION['globals'][$name]);
@@ -83,8 +83,7 @@ class System
             return false;
         }
     }
-    public static function clean($data)
-    {
+    public static function clean($data) {
         // Fix &entity\n;
         $data = str_replace(array('&amp;','&lt;','&gt;'), array('&amp;amp;','&amp;lt;','&amp;gt;'), $data);
         $data = preg_replace('/(&#*\w+)[\x00-\x20]+;/u', '$1;', $data);
