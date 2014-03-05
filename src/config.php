@@ -16,6 +16,7 @@ class Config
     */
     public static function init($file, $name = 'default')
     {
+        $config = null;
         if (!$file) {
             throw new Exception("No valid config file supplied");
         }
@@ -23,6 +24,7 @@ class Config
             self::$instance = new self;
         }
         include($file);
+        self::$confArray = $config;
         self::$name = $name;
         return self::$instance;
     }

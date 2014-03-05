@@ -16,6 +16,7 @@ class TwigView
     */
     public static function init($name = null)
     {
+        require_once 'Twig/Autoloader.php';
         Twig_Autoloader::register();
         return new TwigView($name);
     }
@@ -24,7 +25,6 @@ class TwigView
     */
     public function __construct($name = null)
     {
-        require_once 'Twig/Autoloader.php';
         if ($name) {
             $this->load($name);
         }
