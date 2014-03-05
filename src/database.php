@@ -10,7 +10,8 @@
 /**
  * Class Database
  */
-class Database {
+class Database
+{
     public static $instance = array();
     private static $db = null;
     public static $name = null;
@@ -21,13 +22,14 @@ class Database {
      * @return mixed Instance of defined name
      * @throws Exception PDO Error
      */
-    public static function Init($name='default') {
-        if(empty(self::$instance[$name])) {
+    public static function Init($name='default')
+    {
+        if (empty(self::$instance[$name])) {
             self::$instance[$name] = new self;
         }
         $dbc = Config::get('database');
         $dbc = $dbc[$name];
-        if($dbc['driver'] == 'sqlite') {
+        if ($dbc['driver'] == 'sqlite') {
             self::$db = new PDO("sqlite:$dbc[file]");
         }
         else {
@@ -53,9 +55,10 @@ class Database {
      * @return bool Did query succeed?
      * @throws Error Query not defined error
      */
-    public static function query($sql) {
+    public static function query($sql)
+    {
         self::$results = null;
-        if(empty($sql)) {
+        if (empty($sql)) {
             throw new Error("Database::Query => No query defined");
         }
         $results = array();
@@ -86,18 +89,19 @@ class Database {
      * @return bool Did query succeed?
      * @throws Exception Missing either $table or $fields
      */
-    public static function select($table, $fields, $where=null) {
+    public static function select($table, $fields, $where=null)
+    {
         self::$results = null;
-        if(empty($fields)) {
+        if (empty($fields)) {
                throw new Exception("Database::Select => No table defined");
         }
-        if(empty($fields)) {
+        if (empty($fields)) {
             throw new Exception("Database::Select => No fields defined");
         }
-        if(is_array($fields)) {
+        if (is_array($fields)) {
             $fields = implode(', ', $fields);
         }
-        if(is_array($where)) {
+        if (is_array($where)) {
             $tmp = array();
             foreach($where as $key=>$val) {
                 $tmp[] = "`$key` = '$val'";
@@ -119,20 +123,21 @@ class Database {
      * @return bool Did the query succeed?
      * @throws Exception Missing $tables or $values or $values is not an array
      */
-    public static function insert($table, $values) {
+    public static function insert($table, $values)
+    {
         self::$results = null;
-        if(empty($table)) {
+        if (empty($table)) {
             throw new Exception("Database::Insert => No table defined");
         }
-        if(empty($values)) {
+        if (empty($values)) {
             throw new Exception("Database::Insert => No values defined");
         }
-        if(!is_array($values)) {
+        if (!is_array($values)) {
             throw new Exception("Database::Insert => values to insert must be an array");
         }
         $keys = array();
         $vals = array();
-        foreach($values as $key => $val) {
+        foreach ($values as $key => $val) {
             print "$key => $val<br />";
             $keys[] = $key;
             $vals[] = $val;
@@ -153,14 +158,15 @@ class Database {
      * @return bool
      * @throws Exception
      */
-    public static function update($table, $fields, $where=null) {
-        if(empty($table)) {
+    public static function update($table, $fields, $where=null)
+    {
+        if (empty($table)) {
             throw new Exception("Database::Update => No table defined");
         }
-        if(empty($fields)) {
+        if (empty($fields)) {
             throw new Exception("Database::Update => No fields defined");
         }
-        if(!is_array($fields)) {
+        if (!is_array($fields)) {
             throw new Exception("Database::Update => fields must be an array");
         }
         $vals = array();
@@ -168,10 +174,10 @@ class Database {
             $vals[] = "`$key` = '$val'";
         }
         $vals = implode(", ", $vals);
-        if(!empty($where)) {
-            if(is_array($where)) {
+        if (!empty($where)) {
+            if (is_array($where)) {
                 $tmp = array();
-                foreach($where as $key => $val) {
+                foreach ($where as $key => $val) {
                     $tmp[] = "`$key` = '$val'";
                 }
                 $where = implode(' AND ', $tmp);
@@ -190,11 +196,12 @@ class Database {
      * @return bool
      * @throws Exception
      */
-    public static function delete($table, $where = null) {
-        if(empty($table)) {
+    public static function delete($table, $where = null)
+    {
+        if (empty($table)) {
             throw new Exception("Database::Delete => No table defined");
         }
-        if(!empty($where)) {
+        if (!empty($where)) {
             if(is_array($where)) {
                 $tmp = array();
                 foreach($where as $key => $val) {
@@ -212,7 +219,8 @@ class Database {
     /**
      * @return Array Returns query results
      */
-    public static function results() {
+    public static function results()
+    {
         return self::$results;
     }
 }

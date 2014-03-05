@@ -16,9 +16,9 @@ class System
 {
     const VERSION = '0.0.2';
     public function __construct($configFile, $name = 'default') {
-        $config = Config::init($configFile);
+        $config = Config::init($configFile, $name);
         $this->path = $config->get('path');
-        if ($db=$config->get('database')) {
+        if ($config->get('database')) {
             require_once MY_DIR.'/database.php';
             if ($config->get('autoLoadDB')) {
                 Database::Init();
@@ -62,7 +62,7 @@ class System
         $class = new $system();
         if ($action) {
             $action = "action_".$action;
-            if (method_exists($class,$action)) {
+            if (method_exists($class, $action)) {
                 $class->$action();
             }
             else {
@@ -74,9 +74,9 @@ class System
         }
         return true;
     }
-    public static function send_email($email,$subject,$message) {
-        $header = "From: system@lcnlegacy.com\nMIME-Version: 1.0\nContent-type: text/html charset=iso-8859-1\n";
-        if (mail($email,$subject,$message,$header)) {
+    public static function send_email($from, $email, $subject, $message) {
+        $header = "From: $from\nMIME-Version: 1.0\nContent-type: text/html charset=iso-8859-1\n";
+        if (mail($email, $subject, $message, $header)) {
             return true;
         }
         else {

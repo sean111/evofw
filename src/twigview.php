@@ -4,7 +4,6 @@
 * @package evofw
 * @version 1.0
 */
-require_once 'Twig/Autoloader.php';
 class TwigView
 {
     private $_data = array();
@@ -15,14 +14,17 @@ class TwigView
     * @param string $name Name of the instance
     * @return object TwigView instance for name
     */
-    public static function init($name = null) {
+    public static function init($name = null)
+    {
         Twig_Autoloader::register();
         return new TwigView($name);
     }
     /**
     * @param string $name Name of the instance
     */
-    public function __construct($name = null) {
+    public function __construct($name = null)
+    {
+        require_once 'Twig/Autoloader.php';
         if ($name) {
             $this->load($name);
         }
@@ -31,7 +33,8 @@ class TwigView
     * Load a provided file
     * @param string $name Name of the template to load
     */
-    public function load($name) {
+    public function load($name)
+    {
         $path = Config::get('path');
         $view = $path.'/views/'.$name;
         if(!$name || !is_file($view)) {
@@ -47,14 +50,16 @@ class TwigView
     * @param mixed $value Value for the variable
     * @return object Returns the object for chaining
     */
-    public function bind($key, $value) {
+    public function bind($key, $value)
+    {
         $this->_data[$key] = $value;
         return $this;
     }
     /**
     * Render the template file
     */
-    public function render() {
+    public function render()
+    {
         print $this->twig->render($this->_file, $this->_data);
     }
 }
