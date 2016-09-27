@@ -1,49 +1,57 @@
 <?php
-if(!class_exists('View')) {
+
+if (!class_exists('View')) {
     require_once 'view.php';
 }
 
-if(!class_exists('Config')) {
-        require_once 'config.php';
+if (!class_exists('Config')) {
+    require_once 'config.php';
 }
-define('confFile','tests/config.inc.php');
+define('confFile', 'tests/config.inc.php');
 
-class ViewTest extends PHPUnit_Framework_TestCase {
-    var $view;
-    public function setUp() {
+class ViewTest extends PHPUnit_Framework_TestCase
+{
+    public $view;
+
+    public function setUp()
+    {
         Config::init(confFile);
-        $this->view=View::init();
+        $this->view = View::init();
     }
-    public function tearDown() {
+
+    public function tearDown()
+    {
         unset($this->view);
     }
-    public function testLoad() {
+
+    public function testLoad()
+    {
         try {
-            $this->view->load('testview'); 
+            $this->view->load('testview');
             $this->assertTrue(true);
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             $this->assertFalse(true, $e->getMessage());
         }
     }
-    public function testBind() {
+
+    public function testBind()
+    {
         try {
-            $a=true;
-            $this->view->bind('test',$a);
+            $a = true;
+            $this->view->bind('test', $a);
             $this->assertTrue(true);
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             $this->assertFalse(true, $e->getMessage());
         }
     }
-    public function testRender() {
+
+    public function testRender()
+    {
         try {
             View::init('testview')->render();
             $this->assertTrue(true);
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             $this->assertFalse(true, $e->getMessage());
         }
     }
 }
-?>
